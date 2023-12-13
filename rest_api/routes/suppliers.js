@@ -41,8 +41,29 @@ router.post('/save', function(req, res, next) {
   .catch(error => res.status(400).send(error)) 
 });
 router.put('/update/:id', function(req, res, next) { 
-    res.send("PUT")
-});  
+    
+  let {SupplierName, ContactName, Address, City, PostalCode, Country, Phone} = req.body;
+        
+  Suppliers.update({
+    SupplierName: SupplierName,
+    ContactName: ContactName,
+    Address: Address,
+    City: City,
+    PostalCode: PostalCode,
+    Country:Country,
+    Phone:Phone
+  },
+  {
+      where: {
+        id: parseInt(id)
+      }
+  })
+  .then(suppliers => {  
+    res.json(suppliers);  
+})  
+.catch(error => res.status(400).send(error)) 
+});
+
 router.delete('/delete/:id', function(req, res, next) { 
     res.send("DELETE")
 });
