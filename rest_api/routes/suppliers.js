@@ -47,7 +47,7 @@ router.post('/save', function(req, res, next) {
   .catch(error => res.status(400).send(error)) 
 });
 router.put('/update/:id', function(req, res, next) { 
-    
+  let id = parent(req.params.id);
   let {SupplierName, ContactName, Address, City, PostalCode, Country, Phone} = req.body;
         
   Suppliers.update({
