@@ -50,7 +50,17 @@ router.put('/update/:id', function(req, res, next) {
     res.send("PUT")
 });  
 router.delete('/delete/:id', function(req, res, next) { 
-    res.send("DELETE")
+    let id = parseInt(req.params.id);
+          
+  Suppliers.destroy({
+    where: { 
+      [Op.and]: {SupplierID: id}
+    }
+  })
+  .then(users => {  
+  res.json(users);  
+})  
+.catch(error => res.status(400).send(error)) 
 });
 
 module.exports = router;
