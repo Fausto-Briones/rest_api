@@ -5,7 +5,13 @@ const { Sequelize, Op } = require('sequelize');
 const Suppliers = require('../models').suppliers;
 
 router.get('/findAll', function(req, res, next) {
-    res.send("GET All")
+  Suppliers.findAll({
+
+  })
+  .then(suppliers => {
+      res.json(suppliers);
+  })
+  .catch(error=>res.status(400).send(error));
 });
 router.get('/findById/:id', function(req, res, next) {
     
