@@ -5,7 +5,13 @@ const { Sequelize, Op } = require('sequelize');
 const Suppliers = require('../models').suppliers;
 
 router.get('/findAll', function(req, res, next) {
-    res.send("GET All")
+  Suppliers.findAll({
+
+  })
+  .then(suppliers => {
+      res.json(suppliers);
+  })
+  .catch(error=>res.status(400).send(error));
 });
 router.get('/findById/:id', function(req, res, next) {
     
@@ -65,7 +71,17 @@ router.put('/update/:id', function(req, res, next) {
 });
 
 router.delete('/delete/:id', function(req, res, next) { 
-    res.send("DELETE")
+    let id = parseInt(req.params.id);
+          
+  Suppliers.destroy({
+    where: { 
+      [Op.and]: {SupplierID: id}
+    }
+  })
+  .then(users => {  
+  res.json(users);  
+})  
+.catch(error => res.status(400).send(error)) 
 });
 
 module.exports = router;
