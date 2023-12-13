@@ -75,11 +75,11 @@ router.delete('/delete/:id', function(req, res, next) {
           
   Suppliers.destroy({
     where: { 
-      [Op.and]: {SupplierID: id}
+      [Op.and]: [{SupplierID: id}]
     }
   })
-  .then(users => {  
-  res.json(users);  
+  .then(suppliers => {  
+  res.json(suppliers);  
 })  
 .catch(error => res.status(400).send(error)) 
 });
